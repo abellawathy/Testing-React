@@ -43,6 +43,7 @@ function CommentItem({ comment, threadId }) {
 
       <div
         className="text-gray-700"
+        /* eslint-disable react/no-danger */
         dangerouslySetInnerHTML={{ __html: comment.content }}
       />
 

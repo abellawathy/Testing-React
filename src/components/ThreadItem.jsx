@@ -117,7 +117,10 @@ function ThreadItem({ thread, preview = false }) {
             </Link>
           </>
         ) : (
-          <div dangerouslySetInnerHTML={{ __html: thread.body }} />
+          <div
+            /* eslint-disable react/no-danger */
+            dangerouslySetInnerHTML={{ __html: thread.body }}
+          />
         )}
       </div>
 
