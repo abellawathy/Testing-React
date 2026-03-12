@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "react-app",
+    "airbnb",
+    "plugin:prettier/recommended",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-unused-vars": "warn",
+    "react/jsx-filename-extension": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  },
+  "overrides": [
+    {
+      "files": ["cypress/**/*.js"],
+      "env": {
+        "cypress/globals": true
+      }
+    }
+  ]
+}
