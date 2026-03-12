@@ -17,9 +17,7 @@ describe('asyncPopulateThreads thunk', () => {
       { id: 'thread-1', ownerId: 'user-1', title: 'Thread Test' },
     ];
 
-    const fakeUsers = [
-      { id: 'user-1', name: 'Nabila' },
-    ];
+    const fakeUsers = [{ id: 'user-1', name: 'Nabila' }];
 
     api.getThreads.mockResolvedValue(fakeThreads);
     api.getUsers.mockResolvedValue(fakeUsers);

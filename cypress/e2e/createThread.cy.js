@@ -1,6 +1,6 @@
 describe('Create Thread', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/login');
+    cy.visit('http://localhost:3000/login');
 
     cy.get('input[type=email]').type('test@mail.com');
     cy.get('input[type=password]').type('123456');

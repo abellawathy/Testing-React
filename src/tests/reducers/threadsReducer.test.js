@@ -16,9 +16,7 @@ describe('threadsReducer', () => {
   });
 
   it('should handle UP_VOTE_THREAD correctly', () => {
-    const initialState = [
-      { id: 'thread-1', upVotesBy: [], downVotesBy: [] },
-    ];
+    const initialState = [{ id: 'thread-1', upVotesBy: [], downVotesBy: [] }];
 
     const action = {
       type: ActionType.UP_VOTE_THREAD,
@@ -34,9 +32,7 @@ describe('threadsReducer', () => {
   });
 
   it('should handle DOWN_VOTE_THREAD correctly', () => {
-    const initialState = [
-      { id: 'thread-1', upVotesBy: [], downVotesBy: [] },
-    ];
+    const initialState = [{ id: 'thread-1', upVotesBy: [], downVotesBy: [] }];
 
     const action = {
       type: ActionType.DOWN_VOTE_THREAD,

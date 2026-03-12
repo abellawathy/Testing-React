@@ -9,7 +9,7 @@ describe('Vote Thread', () => {
   });
 
   it('should upvote thread', () => {
-    cy.visit('http://localhost:5173');
+    cy.visit('http://localhost:3000');
 
     cy.get('[data-testid=upvote-button]').first().click();
   });

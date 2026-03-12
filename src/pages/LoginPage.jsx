@@ -11,6 +11,9 @@ function LoginPage() {
 
   const { register, handleSubmit } = useForm();
 
+  const emailRegister = register('email');
+  const passwordRegister = register('password');
+
   const onSubmit = async (data) => {
     try {
       const resultAction = await dispatch(asyncLogin(data));
@@ -51,7 +54,10 @@ function LoginPage() {
           data-testid="email-input"
           className="border p-2 w-full mb-3 rounded"
           placeholder="Email"
-          {...register('email')}
+          name={emailRegister.name}
+          onChange={emailRegister.onChange}
+          onBlur={emailRegister.onBlur}
+          ref={emailRegister.ref}
         />
 
         <input
@@ -59,7 +65,10 @@ function LoginPage() {
           className="border p-2 w-full mb-4 rounded"
           type="password"
           placeholder="Password"
-          {...register('password')}
+          name={passwordRegister.name}
+          onChange={passwordRegister.onChange}
+          onBlur={passwordRegister.onBlur}
+          ref={passwordRegister.ref}
         />
 
         <button

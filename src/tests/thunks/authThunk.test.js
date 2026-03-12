@@ -1,7 +1,6 @@
 import { asyncLogin } from '../../states/auth/thunk';
 import api from '../../utils/api';
 import { setAuthUserActionCreator } from '../../states/auth/action';
-import Swal from 'sweetalert2';
 
 jest.mock('sweetalert2', () => ({
   fire: jest.fn(),

@@ -1,4 +1,7 @@
-import { asyncUpVoteThread, asyncDownVoteThread } from '../../states/threads/thunk';
+import {
+  asyncUpVoteThread,
+  asyncDownVoteThread,
+} from '../../states/threads/thunk';
 import api from '../../utils/api';
 
 jest.mock('sweetalert2', () => ({
@@ -15,7 +18,6 @@ delete window.location;
 window.location = { href: '' };
 
 describe('vote thread thunk', () => {
-
   const dispatch = jest.fn();
 
   const getState = () => ({
