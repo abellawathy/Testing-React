@@ -59,6 +59,7 @@ function asyncUpVoteComment({ threadId, commentId }) {
     const { auth, threadDetail } = getState();
 
     const comment = threadDetail.comments.find((c) => c.id === commentId);
+    if (!comment) return;
 
     const isUpVoted = comment.upVotesBy.includes(auth.id);
 
@@ -90,6 +91,7 @@ function asyncDownVoteComment({ threadId, commentId }) {
     const { auth, threadDetail } = getState();
 
     const comment = threadDetail.comments.find((c) => c.id === commentId);
+    if (!comment) return;
 
     const isDownVoted = comment.downVotesBy.includes(auth.id);
 
