@@ -44,6 +44,6 @@ describe('threadsReducer', () => {
 
     const nextState = threadsReducer(initialState, action);
 
-    expect(nextState[0].downVotesBy).toContain('user-1');
+    expect(nextState[0].downVotesBy).toContain(3);
   });
 });
