@@ -10,10 +10,11 @@ import {
 
 function ThreadItem({ thread, preview = false }) {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector((state) => state.authUser);
   const navigate = useNavigate();
 
   const onUpVote = () => dispatch(asyncUpVoteThread(thread.id));
+
   const onDownVote = () => dispatch(asyncDownVoteThread(thread.id));
 
   const onShare = async () => {

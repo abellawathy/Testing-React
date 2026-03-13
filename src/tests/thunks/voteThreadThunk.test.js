@@ -4,25 +4,13 @@ import {
 } from '../../states/threads/thunk';
 import api from '../../utils/api';
 
-jest.mock('sweetalert2', () => ({
-  fire: jest.fn(),
-}));
-
-jest.mock('../../utils/api', () => ({
-  upVoteThread: jest.fn(),
-  downVoteThread: jest.fn(),
-  neutralVoteThread: jest.fn(),
-}));
-
-delete window.location;
-window.location = { href: '' };
+jest.mock('../../utils/api');
 
 describe('vote thread thunk', () => {
   const dispatch = jest.fn();
 
   const getState = () => ({
     auth: { id: 'user-1' },
-
     threads: [
       {
         id: 'thread-1',
@@ -30,23 +18,28 @@ describe('vote thread thunk', () => {
         downVotesBy: [],
       },
     ],
-
     threadDetail: null,
   });
 
-  it('should dispatch action when upvote success', async () => {
-    api.upVoteThread.mockResolvedValue();
+  beforeEach(() => {
+    dispatch.mockClear();
+  });
+
+  it('should dispatch upvote action when upvote success', async () => {
+    api.upVoteThread.mockResolvedValue({ status: 'success' });
 
     await asyncUpVoteThread('thread-1')(dispatch, getState);
 
+    expect(api.upVoteThread).toHaveBeenCalledWith('thread-1');
     expect(dispatch).toHaveBeenCalled();
   });
 
-  it('should dispatch action when downvote success', async () => {
-    api.downVoteThread.mockResolvedValue();
+  it('should dispatch downvote action when downvote success', async () => {
+    api.downVoteThread.mockResolvedValue({ status: 'success' });
 
     await asyncDownVoteThread('thread-1')(dispatch, getState);
 
+    expect(api.downVoteThread).toHaveBeenCalledWith('thread-1');
     expect(dispatch).toHaveBeenCalled();
   });
 });

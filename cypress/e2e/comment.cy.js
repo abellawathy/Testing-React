@@ -1,6 +1,6 @@
 describe('Add Comment', () => {
   beforeEach(() => {
-    cy.intercept('POST', '**/v1/authentications').as('login');
+    cy.intercept('POST', '**/v1/login').as('login');
 
     cy.visit('http://localhost:3000/login');
 
