@@ -66,6 +66,7 @@ function CreateThreadPage() {
           />
 
           <button
+            data-testid="create-thread-btn"
             type="submit"
             className="bg-primary hover:bg-accent text-white py-2 rounded-lg transition"
           >

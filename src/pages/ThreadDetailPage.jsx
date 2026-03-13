@@ -46,12 +46,13 @@ function ThreadDetailPage() {
 
       <h3 className="text-xl font-semibold mb-2">Add Comment</h3>
       <form onSubmit={onSubmitComment} className="flex gap-2 mb-6">
-        <input
+        <textarea
           className="border p-2 rounded w-full"
           placeholder="Write comment"
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
+
         <button
           className="bg-blue-500 text-white px-4 rounded hover:bg-blue-600"
           type="submit"

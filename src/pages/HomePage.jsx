@@ -19,6 +19,7 @@ function HomePage() {
     () => [...new Set(threads.map((thread) => thread.category))],
     [threads]
   );
+
   const filteredThreads = category
     ? threads.filter((thread) => thread.category === category)
     : threads;
@@ -55,7 +56,7 @@ function HomePage() {
       {loading ? (
         ['s1', 's2', 's3'].map((id) => <ThreadSkeleton key={id} />)
       ) : (
-        <ThreadList threads={filteredThreads} preview />
+        <ThreadList threads={filteredThreads} />
       )}
     </div>
   );

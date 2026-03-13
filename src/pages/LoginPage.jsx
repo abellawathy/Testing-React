@@ -51,6 +51,7 @@ function LoginPage() {
         </h2>
 
         <input
+          type="email"
           data-testid="email-input"
           className="border p-2 w-full mb-3 rounded"
           placeholder="Email"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiThumbsUp, FiThumbsDown, FiShare2 } from 'react-icons/fi';
 import Swal from 'sweetalert2';
@@ -11,6 +11,7 @@ import {
 function ThreadItem({ thread, preview = false }) {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const onUpVote = () => dispatch(asyncUpVoteThread(thread.id));
   const onDownVote = () => dispatch(asyncDownVoteThread(thread.id));
@@ -20,10 +21,7 @@ function ThreadItem({ thread, preview = false }) {
     const text = encodeURIComponent(thread.title);
 
     if (navigator.share) {
-      await navigator.share({
-        title: thread.title,
-        url,
-      });
+      await navigator.share({ title: thread.title, url });
       return;
     }
 
@@ -32,34 +30,28 @@ function ThreadItem({ thread, preview = false }) {
       width: 400,
       showConfirmButton: false,
       html: `
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px">
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px">
+          <a href="https://wa.me/?text=${text}%20${url}" target="_blank"
+            style="display:flex;flex-direction:column;align-items:center;padding:12px;border-radius:10px;background:#25D366;color:white;text-decoration:none;font-weight:600">
+            <span style="font-size:22px">📱</span> WhatsApp
+          </a>
 
-        <a href="https://wa.me/?text=${text}%20${url}" target="_blank"
-          style="display:flex;flex-direction:column;align-items:center;padding:12px;border-radius:10px;background:#25D366;color:white;text-decoration:none;font-weight:600">
-          <span style="font-size:22px">📱</span>
-          WhatsApp
-        </a>
+          <a href="https://twitter.com/intent/tweet?text=${text}&url=${url}" target="_blank"
+            style="display:flex;flex-direction:column;align-items:center;padding:12px;border-radius:10px;background:#1DA1F2;color:white;text-decoration:none;font-weight:600">
+            <span style="font-size:22px">🐦</span> Twitter / X
+          </a>
 
-        <a href="https://twitter.com/intent/tweet?text=${text}&url=${url}" target="_blank"
-          style="display:flex;flex-direction:column;align-items:center;padding:12px;border-radius:10px;background:#1DA1F2;color:white;text-decoration:none;font-weight:600">
-          <span style="font-size:22px">🐦</span>
-          Twitter / X
-        </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank"
+            style="display:flex;flex-direction:column;align-items:center;padding:12px;border-radius:10px;background:#1877F2;color:white;text-decoration:none;font-weight:600">
+            <span style="font-size:22px">📘</span> Facebook
+          </a>
 
-        <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank"
-          style="display:flex;flex-direction:column;align-items:center;padding:12px;border-radius:10px;background:#1877F2;color:white;text-decoration:none;font-weight:600">
-          <span style="font-size:22px">📘</span>
-          Facebook
-        </a>
-
-        <button id="copyLink"
-          style="display:flex;flex-direction:column;align-items:center;padding:12px;border-radius:10px;border:none;background:#6B7280;color:white;font-weight:600;cursor:pointer">
-          <span style="font-size:22px">📋</span>
-          Copy Link
-        </button>
-
-      </div>
-    `,
+          <button id="copyLink"
+            style="display:flex;flex-direction:column;align-items:center;padding:12px;border-radius:10px;border:none;background:#6B7280;color:white;font-weight:600;cursor:pointer">
+            <span style="font-size:22px">📋</span> Copy Link
+          </button>
+        </div>
+      `,
       didOpen: () => {
         document.getElementById('copyLink').onclick = async () => {
           await navigator.clipboard.writeText(url);
@@ -74,6 +66,7 @@ function ThreadItem({ thread, preview = false }) {
       },
     });
   };
+
   const isUpVoted = auth && thread.upVotesBy?.includes(auth.id);
   const isDownVoted = auth && thread.downVotesBy?.includes(auth.id);
 
@@ -100,21 +93,27 @@ function ThreadItem({ thread, preview = false }) {
       </div>
 
       <h3 className="text-xl font-bold text-accent mb-2">
-        <Link data-testid="thread-title" to={`/threads/${thread.id}`}>
+        <button
+          type="button"
+          data-testid="thread-title"
+          className="cursor-pointer text-left p-0 m-0 font-bold text-accent"
+          onClick={() => navigate(`/threads/${thread.id}`)}
+        >
           {thread.title}
-        </Link>
+        </button>
       </h3>
 
       <div className="text-gray-700 mb-4">
         {preview ? (
           <>
             <p>{bodyPreview}</p>
-            <Link
-              to={`/threads/${thread.id}`}
-              className="text-blue-500 hover:underline"
+            <button
+              type="button"
+              onClick={() => navigate(`/threads/${thread.id}`)}
+              className="text-blue-500 hover:underline cursor-pointer p-0 m-0 bg-transparent border-0"
             >
               Read more
-            </Link>
+            </button>
           </>
         ) : (
           <div
